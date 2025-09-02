@@ -431,3 +431,46 @@ char *strerror( int error_number );
 >simple x, y;
 >```
 
+#### 结构成员的直接访问
+通过点操作符`.`进行访问
+#### 结构成员的间接访问
+当拥有的是**指向结构的指针**时，可以使用`->`访问其成员
+#### 不完整声明
+先只声明结构名，以便在另一个结构定义时可以在成员中包含该结构的指针：
+```c
+struct B;
+struct A {
+	struct B *ptr;
+};
+struct B {
+	struct A *prt;
+};
+```
+### 结构、指针和成员
+### 位段
+位段的声明和普通结构成员的声明相同，除了：
+- 必须声明为`int`、`signed int`或`unsigned int`类型
+- 位段成员名后跟随一个冒号和一个整数，指定该位段所占的位数
+```c
+struct CHAR {
+	unsigned ch : 7;
+	unsigned font: 6;
+	unsigned size: 19;
+}
+```
+### 联合
+联合的所有成员引用的是内存中的相同位置
+## 动态内存分配
+### malloc/free
+```c
+void *malloc( size_t size );
+void free( void *pointer );
+void *calloc( size_t num_elements, size_t element_size );
+void realloc( void *ptr, size_t new_size );
+```
+### 常见动态内存错误
+- 对NULL指针进行解引用
+- 对分配的内存进行操作时越过边界
+- 释放非动态分配的内存
+- 试图释放一块动态内存的一部分
+- 使用已被释放的动态内存
