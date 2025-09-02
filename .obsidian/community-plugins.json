@@ -7,5 +7,7 @@
   "obsidian-tasks-plugin",
   "table-editor-obsidian",
   "obsidian-git",
-  "obsidian-mind-map"
+  "obsidian-mind-map",
+  "obsidian-vimrc-support",
+  "cm-typewriter-scroll-obsidian"
 ]
