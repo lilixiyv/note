@@ -555,8 +555,84 @@ ANSI C程序，运行时系统必须提供至少三个流：
  3. 调用 `fclose` 关闭流
 标准流的I/O无需打开/关闭
 I/O函数以三种基本形式处理数据：单个字符、文本行和二进制数据
-| 数据类型 | 输入 | 输出 |
-| :--: | :--: | :--: |
-| 字符 | `getcahr` | `putchar` |
-| 文本行 | `gets` `scanf`| `puts` `printf`|
-| 二进制数据 | 
+
+| 数据类型  |       输入       |       输出        |
+| :---: | :------------: | :-------------: |
+|  字符   |   `getcahr`    |    `putchar`    |
+|  文本行  | `gets` `scanf` | `puts` `printf` |
+| 二进制数据 |    `fread`     |    `fwrite`     |
+### 打开流
+`FILE *fopen( char const *name, char const *mode );`
+打开一个特定文件，并将一个流与之关联。
+`FILE *freopen( char const *filename, char const *mode, FILE *stream );`
+### 关闭流
+`int fclose( FILE *f );`
+成功则返回零值，否则返回EOF
+### 字符I/O
+getchar函数族：
+```c
+int fgetc( FILE *stream );
+int getc( FILE *stream );
+int getchar ( void );
+```
+putchar函数族：
+```c
+int fputc( int character, FILE *stream );
+int putc( int character, FILE *stream );
+int putchar( int character );
+```
+#### 撤销字符I/O
+将一个字符返回到流中
+```c
+int ungetc( int character, FILE *stream );
+```
+### 未格式化的行I/O
+
+```c
+char *fgets( char *buffer, int buffer_size, FILE *stream );
+char *gets( char *buffer );
+
+int fputs( char const *buffer, FILE *stream );
+int puts( char const * buffer );
+```
+### 格式化的行I/O
+#### scanf族
+```c
+int fscanf( FILE *stream, char const *format, ... );
+int scanf( char const *format, ... );
+int sscanf( char const *string, char const *format, ... );
+```
+#### printf族
+ ```c
+ int fprintf( FILE *stream, char const *format, ... );
+ int printf( char const *format, ... );
+ int sprintf( char *buffer, char const *format, ... );
+ ```
+ ### 二进制I/O
+ ```c
+ size_t fread( void *buffer, size_t size, size_t count, FILE *stream );
+ size_t fwrite( void *buffer, size_t size, size_t count, FILE *stream );
+ ```
+ ### 刷新和定位函数
+ ```c
+ int fflush( FILE *stream );
+ long ftell( FILE *stream );
+ int feek( FILE *stream, long offset, int from );
+ ```
+ ### 流错误函数
+ ```c
+ int feof( FILE *stream );
+ int ferror( FILE *stream );
+ void clearerr( FILE *stream );
+ ```
+ ### 临时文件
+ ```c
+ FILE *tmpfile( void ); // 以wb+模式打开
+ char *tmpnam( char *name ); // 为临时文件命名
+ ```
+ ### 文件操纵函数
+ ```c
+ int remove( char const *filename );
+ int rename( char const *oldname, char const *newname );
+ ```
+ 
