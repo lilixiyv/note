@@ -167,7 +167,7 @@ int const * const ptr; //指向常量的常量指针
 	- 内层代码块标识符将隐藏外层同名标识符
 #### 文件作用域
 所有在代码块之外声明的标识符均具有文件作用域
-	#### 原型作用域
+#### 原型作用域
 适用于在函数原型中声明的参数名
 #### 函数作用域
 适用于语句标签，用于goto语句
@@ -635,4 +635,112 @@ int sscanf( char const *string, char const *format, ... );
  int remove( char const *filename );
  int rename( char const *oldname, char const *newname );
  ```
- 
+ ## 标准函数库
+ ### 整型函数
+ 返回整形值
+ #### 算术`<stdlib.h>`
+ ```c
+ int abs( int value );
+ long int labs( long int value );
+ div_t div( int num, int denominator );
+ ldiv_t ldiv( long int numer, logn int denom );
+ ```
+ `div_t`结构：
+ ```c
+ int quot; // 商
+ int rem; // 余数
+ ```
+ #### 随机数`<stdlib.h>`
+ ```c
+ int rand( void );
+ void srand( unsigned int seed ); // 对rand进行初始化
+ ```
+ #### 字符串转换`<stdlib.h>`
+ ```c
+ int atoi( char const *string );
+ long int atol( char const *string );
+ long int strtol( char const *string, char **unused, int base );
+ unsigned long int strtoul( char const *string, char **unused, int base );
+ ```
+ ### 浮点型函数`math.h`
+ #### 三角函数
+ ```c
+ double sin( double angle );
+ double cos( double angle );
+ double tan( double angle );
+ double asin( double value );
+ double acos( double value );
+ double atan( double value );
+ double atan( double x, double y );
+ ```
+#### 双曲函数
+```c
+double sinh( double angle );
+double cosh( double angle );
+double tanh( double angle );
+```
+### 对数和指数函数
+```c
+double exp( double x );
+double log( double x );
+double log10( double x );
+```
+#### 幂
+```c
+double pow( double x, double y );
+double sqrt( double x );
+```
+#### 底数、顶数、绝对值和余数
+```c
+double floor( double x );
+double ceil( double x );
+double fabs( double x );
+double fmod( double x, double y );
+```
+#### 字符串转换`<stdlib.h>`
+```c
+double atof( char const *string );
+double strtod( char const *string, char **unused );
+```
+### 日期和时间函数`<time.h>`
+#### 处理器时间
+```c
+clock_t clock( void ); // 返回值由编译器定义，通过除以常量CLOCKS_PER_SEC将其转换为秒 
+```
+#### 当天时间
+```c
+time_t time( time_t *returned_value ); // 未规定以秒为单位
+char *ctime( time_t const *time_value ); // 将time_t存储的时间用字符串表示，下次调用ctime时，可能覆盖该字符串，故需保存该值时，应复制一份
+double difftime( time_t time1, time_t time2 ); // 以秒为单位
+struct tm *gmtime( time_t const *time_value ); // 将时间值转换为UTC
+struct tm *localtime( time_t const *time_value );
+char *asctime( struct tm const *tm_ptr );
+size_t strftime( char *string, size_t maxsize, char const *format, struct tm const *tm_ptr );
+```
+### 非本地跳转`<setjmp.h>`
+```c
+int setjmp( jmp_buf state ); // 第1次被调用时，返回0，作为longjmp的调用结果返回时，返回值为longjmp的value参数值
+void longjmp( jump_buff state, int value );
+```
+### 信号
+一种事件，可能异步发生；若程序未安排如何处理特定信号，则进行缺省反应，未规定，一般为终止程序
+程序可通过调用signal，或忽略该信号，或设置信号处理函数，当信号发生时程序将调用该函数
+#### 信号名`<signal.h>`
+|   信号    | 含义          |
+| :-----: | ----------- |
+| SIGABRT | 程序请求异常终止    |
+| SIGFPE  | 发生一个算术错误    |
+| SIGILL  | 检测到非法指令     |
+| SIGSEGV | 检测到对内存的非法访问 |
+| SIGINT  | 收到一个交互性注意信号 |
+| SIGTERM | 收到一个终止程序的请求 |
+#### 处理信号
+```c
+int raise( int sig ); // 引发指定信号
+void ( *signal( int sig, void ( *handler )( int ) ) )( int ); // 指定对信号的处理方式，返回之前的处理函数的指针
+```
+#### 信号处理函数
+信号处理函数应只调用signal库函数，并只进行向一个`volatile sig_atomic_t`的静态变量的赋值操作
+
+## 运行时环境
+## 判断运行时环境
