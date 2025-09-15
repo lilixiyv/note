@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "code/Java设计模式.md",
+                "file": "read/疾风怒涛.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Java设计模式"
+              "title": "疾风怒涛"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "code/C.md",
+                "file": "read/疾风怒涛.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of C"
+              "title": "Outline of 疾风怒涛"
             }
           },
           {
@@ -196,9 +196,9 @@
   },
   "active": "505c855a69dad0a0",
   "lastOpenFiles": [
-    "Untitled.md",
     "code/Java设计模式.md",
     "read/疾风怒涛.md",
+    "Untitled.md",
     "Welcome.md",
     "work/数据库助教.md",
     "code/C.md",
