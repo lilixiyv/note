@@ -60,7 +60,44 @@ $$
 E(T(x)) = q(\theta)
 $$
 ### 1.5 一致最小方差无偏估计 UMVUE
-
+**存在性**
+**唯一性**：概率1下UMVUE唯一
+#### 完全性
+$g(t)$为实值函数，若对$\forall \theta \in \Theta$，$E_\theta (g(T)) = 0$成立时必有$g(T)\equiv 0$，则$T(X)$是完全的
+**定理**
+$$
+p(x,\theta) = c(\theta)h(x)\exp\left\{\sum_{k=1}^m w_k T_k(x) \right\}
+$$
+其中$w=w(\theta)\in \Omega \subset R^m$ 
+若$\Omega$有内点，则$(T_1(x),\ldots,T_m(x))$是**完全充分**的
+**定理** Lehmann-Scheffe
+$S(x)$为完全充分统计量，$\varphi (x)$为$q(\theta)$的无偏估计
+$\rightarrow$
+$T(x)=E_\theta (\varphi(x)|S(x))$是$q(\theta)$的UMVUE
+进一步，若$\forall \theta \in \Theta$，$Var_\theta(T(x)) \in \infty$，则$T(x)$是$q(\theta)$唯一的UMVUE
+### 1.6 信息不等式
+#### Cramer-Rao族
+(1)支撑$A=\{x:p(x,\theta)>0\}$与$\theta$无关，且对$\forall x \in A$，偏导$\frac{\partial}{\partial \theta} ln p(x,\theta)$存在
+(2)$\forall \theta \in \Theta$，$T(x)$是满足$E_\theta |T| < \infty$ 任意统计量，则对$T(x)p(x,\theta)$，积分和微分可交换次序。
+#### Fisher信息量
+当仅有（1）成立时，定义：
+$$
+I(\theta)=E{[\frac{\partial}{\partial \theta} ln p(x,\theta)]}^2 (0\leq I(\theta) \leq \infty)
+$$
+当
+$$
+\frac{d^2}{d \theta ^2} \int_{-\infty}^{+\infty} p(x;\theta) dx = \int_{-\infty}^{+\infty} \frac{\partial^2 p(x;\theta)}{\partial \theta^2} dx
+$$成立时，有
+$$
+I(\theta) = - E_\theta [\frac{\partial^2}{\partial \theta^2} \ln p(x;\theta)]
+$$
+#### Cramer-Rao下界
+$\frac{1}{I(\theta)}$
+有：$\forall T(X) \in U_\theta$
+$$ 
+Var_\theta (T(X)) \geq \frac{1}{I(\theta)}
+$$
+其中$\forall \theta \in \Theta$，满足$Var_\theta (T(X)) < +\infty$，分布族为Cramer-Rao正则族，且$0<I(\theta)<+\infty$
 # 常用定理与性质
 
 ## 两点分布可加性
