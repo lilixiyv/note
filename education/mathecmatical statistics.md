@@ -342,6 +342,8 @@ $$
 $$
 E[X]=\lambda,Var(X)=\lambda
 $$
+### 可加性
+$X_1\sim \lambda_1,X_2\sim \lambda_2$，则$X_1+X_2\sim Poisson(\lambda_1+\lambda_2)$
 ## 正态分布
 ### 正态分布与卡方分布
 $$
